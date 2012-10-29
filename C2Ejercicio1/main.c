@@ -1,0 +1,151 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define TAM 10
+
+//Metodos de ordenamiento
+//Burbujas
+/*
+4  | 10 | -1 | 3  | 20
+-1 | 10 | 4  | 3  | 20
+-1 | 3  | 10 | 4  | 20
+-1 | 3  | 4  | 10 | 20
+
+
+//Seleccion
+
+4 | (10 | 5 | 6 | 20)
+4 | 5 | 10 | (6 | 20)
+4 | 5 | 6 | (10 | 20)
+*/
+
+//Insercion
+
+/*
+8  | 30 | 4  | 6  | -2
+4  | 8  | 30 | 6  | -2
+-2 | 4  | 8  | 30 | 6
+*/
+
+//ShellSort
+
+/*
+30 | 4 | -1 | 2 | 12 | 8
+compara el primero (30) con el 3ro despues del 30
+2 | 4 | -1 | 30 | 12 | 8 ---- 30 < 2 -> cambia
+compara el primero (2) con el 2do despues del 2
+-1 | 4 | 2 | 8 | 12 | 30
+compara el primero (2) con el 1ro despues del 2
+-1 | 2 | 4 | 8 | 12 | 30
+*/
+void cargar(int vector[], int tamanio);
+void mostrar(int vector[], int tamanio);
+void ordenarBurbujas(int vector[], int tamanio);
+void ordenarSeleccion(int vector[], int tamanio);
+void ordenarInsercion(int vector[], int tamanio);
+
+int main()
+{
+    int vector[TAM];
+    int tamanio;
+
+    printf("Ingrese tamaño: ");
+    scanf("%d", &tamanio);
+
+    cargar(vector, tamanio);
+    mostrar(vector, tamanio);
+//    ordenarBurbujas(vector, tamanio);
+//    ordenarSeleccion(vector, tamanio);
+    ordenarInsercion(vector, tamanio);
+//    ordenarShell(vector, tamanio);
+    mostrar(vector, tamanio);
+
+    return 0;
+}
+
+void cargar(int vector[], int tamanio)
+{
+    int i;
+
+    for(i = 0; i < tamanio; i++)
+    {
+        printf("Ingrese posicion %d: \n", i);
+        scanf("%d", &vector[i]);
+    }
+}
+
+void mostrar(int vector[], int tamanio)
+{
+    int i;
+    printf("\n");
+    for(i = 0; i < tamanio; i++)
+    {
+        printf("vec[%d] = %d \n", i, vector[i]);
+    }
+}
+
+void ordenarBurbujas(int vector[], int tamanio)
+{
+    int i;
+    int j;
+    int aux;
+
+    for(i = 0; i < tamanio-1; i++)
+    {
+        for(j = i; j < tamanio; j++)
+        {
+            if(vector[i] > vector[j])
+            {
+                aux = vector[i];
+                vector[i] = vector[j];
+                vector[j] = aux;
+            }
+        }
+    }
+}
+
+void ordenarSeleccion(int vector[], int tamanio)
+{
+    int i;
+    int j;
+    int aux;
+    int posicionMenor;
+
+    for(i = 0; i < tamanio-1; i++)
+    {
+        posicionMenor = i;
+        for(j = i; j < tamanio; j++)
+        {
+            if(vector[i] > vector[j])
+                posicionMenor = j;
+        }
+
+        if(posicionMenor != i)
+        {
+            aux = vector[i];
+            vector[i] = vector[posicionMenor];
+            vector[posicionMenor] = aux;
+        }
+    }
+}
+
+void ordenarInsercion(int vector[], int tamanio)
+{
+    int i, j, j2, aux;
+    for(i = 0; i < tamanio; i++)
+    {
+        for(j = i+1; j < tamanio; j++)
+        {
+            if(vector[i] > vector[j])
+            {
+                printf("%d es mayor que %d\n", vector[i], vector[j]);
+                aux = vector[j];
+
+                for(j2 = j; j2 > 1; j2--) {
+                    printf("cambio %d por %d\n", vector[j2], vector[j2-1]);
+                    vector[j2] = vector[j2-1];
+                }
+                vector[i] = aux;
+            }
+        }
+    }
+}
