@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1346962941 source:c:\users\andrés cabrera\google drive\facultad\algoritmos i\fibonacci\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
